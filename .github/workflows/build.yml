@@ -17,4 +17,4 @@ jobs:
       run: sudo apt-get update && sudo apt-get install -y g++
 
     - name: Build
-      run: g++ -o numbergamebuild /c/Users/LERA/source/projects/numbergamebuild/numbergamebuild/.github/workflows/numbergamebuild.cpp
+      run: g++ -o numbergamebuild ./workflows/numbergamebuild.cpp
