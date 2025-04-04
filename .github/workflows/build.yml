@@ -1,13 +1,38 @@
-name: Build
-on: [push]
+name: Build and Test
+on: [push, pull_request]
 
 jobs:
-  build:
+  build-and-test:
     runs-on: ubuntu-latest
+    
     steps:
     - uses: actions/checkout@v4
     
-    - name: Compile
+    - name: Install dependencies
+      run: sudo apt-get update && sudo apt-get install -y g++
+    
+    - name: Make compile script executable
+      run: chmod +x compile.sh
+    
+    - name: Compile using script
+      run: ./compile.sh
+    
+    - name: Basic test - program runs
       run: |
-        chmod +x compile.sh
-        ./compile.sh
+        # Проверка что программа запускается
+        echo "Q" | timeout 5s ./numbergame
+        if [ $? -ne 0 ]; then
+          echo "FAIL: Program crashed or timed out"
+          exit 1
+        fi
+        echo "PASS: Program runs successfully"
+    
+    - name: Quick game test
+      run: |
+        # Тест с правильным ответом с первой попытки
+        echo -e "TestUser\n42" | ./numbergame | grep "Поздравляю"
+        if [ $? -ne 0 ]; then
+          echo "FAIL: Game completion check failed"
+          exit 1
+        fi
+        echo "PASS: Basic game logic works"
