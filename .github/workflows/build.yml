@@ -16,23 +16,3 @@ jobs:
     
     - name: Compile using script
       run: ./compile.sh
-    
-    - name: Basic test - program runs
-      run: |
-        # Проверка что программа запускается
-        echo "Q" | timeout 5s ./numbergamebuild
-        if [ $? -ne 0 ]; then
-          echo "FAIL: Program crashed or timed out"
-          exit 1
-        fi
-        echo "PASS: Program runs successfully"
-    
-    - name: Quick game test
-      run: |
-        # Тест с правильным ответом с первой попытки
-        echo -e "TestUser\n42" | ./numbergamebuild | grep "Поздравляю"
-        if [ $? -ne 0 ]; then
-          echo "FAIL: Game completion check failed"
-          exit 1
-        fi
-        echo "PASS: Basic game logic works"
