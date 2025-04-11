@@ -37,7 +37,7 @@ int main() {
 
         cout << "Введите ваше имя: ";
         cin >> name;
-        cout << "Привет, " << name << "!" << endl;
+        cout << "Привет, " << name << "!" << "Давай сыграем в игру" << endl;
 
         secretNumber = rand() % 100 + 1; 
 
