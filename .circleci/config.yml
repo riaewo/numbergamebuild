@@ -1,0 +1,24 @@
+version: 2.1  # Используем актуальную версию CircleCI
+
+jobs:
+  build-and-test:
+    docker:
+      - image: cimg/base:2024.01  # Официальный образ CircleCI (Ubuntu-based)
+    steps:
+      - checkout  # Клонируем репозиторий
+
+      - run:
+          name: Установка зависимостей
+          command: |
+            sudo apt-get update
+            sudo apt-get install -y g++
+
+      - run:
+          name: Компиляция
+          command: g++ -o numbergamebuild numbergamebuild.cpp
+
+workflows:
+  version: 2
+  build-and-test:
+    jobs:
+      - build-and-test
