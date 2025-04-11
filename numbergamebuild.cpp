@@ -1,3 +1,10 @@
+/**
+ * @file numbergamebuild.cpp
+ * @brief Guess the number game with a tilt of repeated objects.
+ * @author Lera
+ * @date 2024
+ */
+
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
@@ -5,24 +12,34 @@
 
 using namespace std;
 
+/**
+ * @brief Main function of the game
+ * @return Program exit code
+ *
+ * Initializes the game, processes user input, 
+ * manages the game loop.
+ */
 int main() {
-    setlocale(0, "");
-
-    // Инициализация генератора случайных чисел
-    srand(time(0));
+    setlocale(0, ""); 
+    srand(time(0)); 
 
     char playAgain = 'y';
 
     while (playAgain == 'y' || playAgain == 'Y') {
-        cout << "Новая функция: введите ваше имя: ";
+        /// @var Player name
         string name;
+        /// @var The Hidden Number
+        int secretNumber;
+        /// @var Player attempt
+        int guess;
+        /// @var Attempt counter
+        int attempts = 0;
+
+        cout << "Введите ваше имя: ";
         cin >> name;
         cout << "Привет, " << name << "!" << endl;
 
-        // Загадываем число от 1 до 100
-        int secretNumber = rand() % 100 + 1;
-        int guess;
-        int attempts = 0;
+        secretNumber = rand() % 100 + 1; 
 
         cout << "Я загадал число от 1 до 100. Попробуй угадать!" << endl;
 
@@ -38,7 +55,8 @@ int main() {
                 cout << "Слишком много!" << endl;
             }
             else {
-                cout << "Поздравляю, " << name << "! Ты угадал за " << attempts << " попыток." << endl;
+                cout << "Поздравляю, " << name << "! Ты угадал за "
+                    << attempts << " попыток." << endl;
             }
         } while (guess != secretNumber);
 
