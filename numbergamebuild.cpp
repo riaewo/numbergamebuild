@@ -11,33 +11,41 @@ int main() {
     // Инициализация генератора случайных чисел
     srand(time(0));
 
-    cout << "Новая функция: введите ваше имя: ";
-    string name;
-    cin >> name;
-    cout << "Привет, " << name << "!" << endl;
+    char playAgain = 'y';
 
-    // Загадываем число от 1 до 100
-    int secretNumber = rand() % 100 + 1;
-    int guess;
-    int attempts = 0;
+    while (playAgain == 'y' || playAgain == 'Y') {
+        cout << "Новая функция: введите ваше имя: ";
+        string name;
+        cin >> name;
+        cout << "Привет, " << name << "!" << endl;
 
-    cout << "Я загадал число от 1 до 100. Попробуй угадать!" << endl;
+        // Загадываем число от 1 до 100
+        int secretNumber = rand() % 100 + 1;
+        int guess;
+        int attempts = 0;
 
-    do {
-        cout << "Твоя догадка: ";
-        cin >> guess;
-        attempts++;
+        cout << "Я загадал число от 1 до 100. Попробуй угадать!" << endl;
 
-        if (guess < secretNumber) {
-            cout << "Слишком мало!" << endl;
-        }
-        else if (guess > secretNumber) {
-            cout << "Слишком много!" << endl;
-        }
-        else {
-            cout << "Поздравляю! Ты угадал за " << attempts << " попыток." << endl;
-        }
-    } while (guess != secretNumber);
+        do {
+            cout << "Твоя догадка: ";
+            cin >> guess;
+            attempts++;
 
+            if (guess < secretNumber) {
+                cout << "Слишком мало!" << endl;
+            }
+            else if (guess > secretNumber) {
+                cout << "Слишком много!" << endl;
+            }
+            else {
+                cout << "Поздравляю, " << name << "! Ты угадал за " << attempts << " попыток." << endl;
+            }
+        } while (guess != secretNumber);
+
+        cout << "Сыграем ещё? (y/n): ";
+        cin >> playAgain;
+    }
+
+    cout << "Спасибо за игру! До свидания!" << endl;
     return 0;
 }
